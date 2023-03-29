@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwaspA01", "OwaspA01\OwaspA01.csproj", "{A8CA32EC-78A6-4F8D-AE82-88307B3A4FE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Defended", "Defended\Defended.csproj", "{F7854F1A-E7B3-4E04-A368-8014FA86FBE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A8CA32EC-78A6-4F8D-AE82-88307B3A4FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8CA32EC-78A6-4F8D-AE82-88307B3A4FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8CA32EC-78A6-4F8D-AE82-88307B3A4FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8CA32EC-78A6-4F8D-AE82-88307B3A4FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7854F1A-E7B3-4E04-A368-8014FA86FBE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7854F1A-E7B3-4E04-A368-8014FA86FBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7854F1A-E7B3-4E04-A368-8014FA86FBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7854F1A-E7B3-4E04-A368-8014FA86FBE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
