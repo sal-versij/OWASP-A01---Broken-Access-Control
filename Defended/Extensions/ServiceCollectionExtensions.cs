@@ -17,48 +17,42 @@ public static class ServiceCollectionExtensions {
 	/// <param name="services"></param>
 	/// <returns></returns>
 	public static IServiceCollection AddInjectablesFromAssembly(this IServiceCollection services) {
-		foreach(Type type in AssemblyTypes) {
-			if (type is not { IsInterface: false, IsAbstract: false, IsGenericType: false }) {
+		foreach(var type in AssemblyTypes) {
+			if (type is not { IsInterface: false, IsAbstract: false, IsGenericType: false })
 				continue;
-			}
 
-			foreach(InjectableAttribute attribute in type.GetCustomAttributes<InjectableAttribute>()) {
+			foreach(var attribute in type.GetCustomAttributes<InjectableAttribute>())
 				switch (attribute.Lifetime) {
 				case ServiceLifetime.Scoped:
-					if (attribute.ImplementationType != null) {
+					if (attribute.ImplementationType != null)
 						services.AddScoped(attribute.ImplementationType, type);
-					} else {
+					else
 						services.AddScoped(type);
-					}
 
 					break;
 				case ServiceLifetime.Singleton:
-					if (attribute.ImplementationType != null) {
+					if (attribute.ImplementationType != null)
 						services.AddSingleton(attribute.ImplementationType, type);
-					} else {
+					else
 						services.AddSingleton(type);
-					}
 
 					break;
 				case ServiceLifetime.Transient:
-					if (attribute.ImplementationType != null) {
+					if (attribute.ImplementationType != null)
 						services.AddTransient(attribute.ImplementationType, type);
-					} else {
+					else
 						services.AddTransient(type);
-					}
 
 					break;
 				}
-			}
 		}
 
 		return services;
 	}
 
 	public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, string? connectionString) {
-		if (services == null) {
+		if (services == null)
 			throw new ArgumentNullException(nameof(services));
-		}
 
 		services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlite(connectionString))
 				.AddDatabaseDeveloperPageExceptionFilter();

@@ -19,9 +19,8 @@ public static class DbContextExtensions {
 
 	private static Task SetIdentityInsert<T>(DbContext context, bool enable) {
 		var entityType = context.Model.FindEntityType(typeof(T));
-		if (entityType == null) {
+		if (entityType == null)
 			throw new();
-		}
 
 		var value = enable ? "ON" : "OFF";
 		return context.Database.ExecuteSqlRawAsync(

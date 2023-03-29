@@ -1,4 +1,5 @@
 using Defended.Extensions;
+using Defended.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +10,12 @@ builder.Services
 	   .AddApplicationIdentity()
 	   .AddInjectablesFromAssembly();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(Policies.AddPolicies);
 
 builder.Services.AddRazorPages(
 	options => {
-		options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage", "LoggedPolicy");
-		options.Conventions.AuthorizeFolder("/Agencies", "LoggedPolicy");
+		options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage", nameof(Policies.LoggedPolicy));
+		options.Conventions.AuthorizeFolder("/", nameof(Policies.LoggedPolicy));
 	});
 
 var app = builder.Build();
@@ -33,6 +34,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCors();
 app.UseAuthorization();
 
 app.MapRazorPages();
