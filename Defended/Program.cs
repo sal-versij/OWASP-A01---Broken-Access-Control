@@ -15,7 +15,8 @@ builder.Services.AddAuthorization(Policies.AddPolicies);
 builder.Services.AddRazorPages(
 	options => {
 		options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage", nameof(Policies.LoggedPolicy));
-		options.Conventions.AuthorizeFolder("/", nameof(Policies.LoggedPolicy));
+		options.Conventions.AuthorizeFolder("/",       nameof(Policies.LoggedPolicy));
+		options.Conventions.AuthorizeFolder("/Admins", nameof(Policies.AdminPolicy));
 	});
 
 var app = builder.Build();

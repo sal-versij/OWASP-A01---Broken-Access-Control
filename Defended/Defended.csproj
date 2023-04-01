@@ -25,9 +25,4 @@
         </Content>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages\Admins" />
-      <Folder Include="Pages\Users" />
-    </ItemGroup>
-
 </Project>

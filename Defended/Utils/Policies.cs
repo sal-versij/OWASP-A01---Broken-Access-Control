@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 namespace Defended.Utils;
 
 internal static class Policies {
+	public const string AdminClaim = "AdminClaim";
+
 	public static void LoggedPolicy(AuthorizationPolicyBuilder policy) {
 		policy.RequireAuthenticatedUser();
 	}
 
 	public static void AdminPolicy(AuthorizationPolicyBuilder policy) {
-		policy.RequireClaim("AdminClaim");
+		policy.RequireClaim(AdminClaim);
 	}
 
 	public static void AddPolicies(AuthorizationOptions options) {

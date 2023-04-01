@@ -1,0 +1,44 @@
+﻿@page "/Admins/Permissions/{id?}"
+@model IndexModel
+
+@if (Model.Users is not null) {
+    if (Model.Users.Any()) {
+        <h1>Users</h1>
+        <div class="list-group list-group-flush">
+            @foreach(var user in Model.Users) {
+                <a asp-route-id="@user.Id" class="list-group-item list-group-item-action">
+                    <strong>@user.UserName</strong>
+                </a>
+            }
+        </div>
+    } else {
+        <div class="alert alert-warning" role="alert">
+            No user found.
+        </div>
+    }
+} else if (Model.PermissionsUser is not null) {
+    <h1>@Model.PermissionsUser.UserName</h1>
+    <h3>Permissions</h3>
+    if (Model.Claims?.Any() ?? false) {
+        <form method="post">
+            <dl>
+                @foreach(var claim in Model.Claims) {
+                    <dt>
+                        <label for="">@claim.Type</label>
+                    </dt>
+                    <dd>
+                        <input type="text" id="@claim.Type" name="claims[@claim.Type]" value="@claim.Value"/>
+                    </dd>
+                }
+            </dl>
+        </form>
+    } else {
+        <div class="alert alert-warning" role="alert">
+            No claim found.
+        </div>
+    }
+} else {
+    <div class="alert alert-warning" role="alert">
+        User not found.
+    </div>
+}

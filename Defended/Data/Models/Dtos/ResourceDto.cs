@@ -1,16 +1,17 @@
 ﻿using System.Linq.Expressions;
-using Defended.Data.Models;
+using Defended.Services.Interfaces;
 
-namespace Defended.EndPoints.Models;
+namespace Defended.Data.Models.Dtos;
 
-public class ResourceDto {
-	public static readonly Expression<Func<Resource, ResourceDto>> Expression = resource => new(resource);
+public class ResourceDto : IExpressionProvider<ResourceDto, Resource> {
+	public static Expression<Func<Resource, ResourceDto>> Expression => resource => new(resource);
 
 	public string? Id          { get; set; }
 	public string  Name        { get; set; } = null!;
 	public string? Description { get; set; }
 
 	public ResourceDto() { }
+
 
 	public ResourceDto(Resource resource) {
 		Id          = resource.Id;

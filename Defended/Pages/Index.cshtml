@@ -1,10 +1,23 @@
 ﻿@page
-@model IndexModel
+@using Defended.Utils
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-12">
+        <ul>
+            @if (User.HasClaim(Policies.AdminClaim, "1")) {
+                <li>
+                    <a asp-page="/Admins/Resources/Index">Admin Resources Panel</a>
+                </li>
+                <li>
+                    <a asp-page="/Admins/Permissions/Index">Permissions Panel</a>
+                </li>
+            }
+            <li>
+                <a asp-page="/Resources/Index">Resources Panel</a>
+            </li>
+        </ul>
+    </div>
 </div>

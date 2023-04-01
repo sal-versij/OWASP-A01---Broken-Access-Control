@@ -2,7 +2,7 @@
 using Defended.Attributes;
 using Defended.Data;
 using Defended.Data.Models;
-using Defended.EndPoints.Models;
+using Defended.Data.Models.Dtos;
 using Defended.Exceptions;
 using Defended.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +19,10 @@ public class ResourcesService : IResourcesService {
 		_permissionService = permissionService;
 	}
 
+	public Task<T> GetAsync<T>(string id) where T : IExpressionProvider<T, Resource> {
+		return GetAsync(id, T.Expression);
+	}
+
 	public async Task<T> GetAsync<T>(string id, Expression<Func<Resource, T>> selector) {
 		await _permissionService.AssertUserCanAccessResourceAsync(id);
 
@@ -28,6 +32,10 @@ public class ResourcesService : IResourcesService {
 		}
 
 		return resource;
+	}
+
+	public async Task<ICollection<T>> GetAllAsync<T>() where T : IExpressionProvider<T, Resource> {
+		return await GetAllAsync(T.Expression);
 	}
 
 	public async Task<ICollection<T>> GetAllAsync<T>(Expression<Func<Resource, T>> selector) {

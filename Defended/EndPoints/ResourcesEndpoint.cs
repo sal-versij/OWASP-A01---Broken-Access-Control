@@ -1,4 +1,4 @@
-﻿using Defended.EndPoints.Models;
+﻿using Defended.Data.Models.Dtos;
 using Defended.Exceptions;
 using Defended.Services.Interfaces;
 using Defended.Utils;
@@ -8,7 +8,7 @@ namespace Defended.EndPoints;
 public class ResourcesEndpoint : IEndpoint {
 	private static async Task<IResult> RetrieveResource(string id, IResourcesService service) {
 		try {
-			var resource = await service.GetAsync(id, ResourceDto.Expression);
+			var resource = await service.GetAsync<ResourceDto>(id);
 			return Results.Ok(resource);
 		} catch (NotFoundException ex) {
 			return Results.NotFound(ex.Message);
@@ -23,7 +23,7 @@ public class ResourcesEndpoint : IEndpoint {
 
 	private static async Task<IResult> RetrieveResources(IResourcesService service) {
 		try {
-			var resources = await service.GetAllAsync(ResourceDto.Expression);
+			var resources = await service.GetAllAsync<ResourceDto>();
 			return Results.Ok(resources);
 		} catch (NotFoundException ex) {
 			return Results.NotFound(ex.Message);
