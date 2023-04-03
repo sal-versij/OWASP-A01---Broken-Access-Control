@@ -1,0 +1,37 @@
+﻿@page "/Admins/Permissions/{id?}"
+@model Undefended.Pages.Admins.Permissions.IndexModel
+
+@if (Model.Users is not null) {
+    if (Model.Users.Any()) {
+        <h1>Users</h1>
+        <div class="list-group list-group-flush">
+            @foreach(var user in Model.Users) {
+                <a asp-route-id="@user.Id" class="list-group-item list-group-item-action">
+                    <strong>@user.Email</strong>
+                </a>
+            }
+        </div>
+    } else {
+        <div class="alert alert-warning" role="alert">
+            No user found.
+        </div>
+    }
+} else if (Model.PermissionsUser is not null) {
+    <h1>@Model.PermissionsUser.Email</h1>
+    <h3>Permissions</h3>
+    if (Model.PermissionsUser.Permissions?.Any() ?? false) {
+        <ul>
+            @foreach(var permission in Model.PermissionsUser.Permissions) {
+                <li>@permission.Permission</li>
+            }
+        </ul>
+    } else {
+        <div class="alert alert-warning" role="alert">
+            No claim found.
+        </div>
+    }
+} else {
+    <div class="alert alert-warning" role="alert">
+        User not found.
+    </div>
+}

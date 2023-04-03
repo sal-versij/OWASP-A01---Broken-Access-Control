@@ -1,0 +1,32 @@
+﻿@page "/Admins/Resources"
+@model Undefended.Pages.Admins.Resources.IndexModel
+
+@{
+    ViewData["Title"] = "Resources";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between">
+            <h2>Resources</h2>
+            <div>
+                <a asp-page="/Admins/Resources/Editor" class="btn btn-primary btn-sm">
+                    Add
+                </a>
+            </div>
+        </div>
+        @if (Model.Resources?.Any() ?? false) {
+            <div class="list-group list-group-flush">
+                @foreach(var resource in Model.Resources) {
+                    <a aria-current="true" asp-page="/Resources/Editor" asp-route-id="@resource.Id" class="list-group-item list-group-item-action">
+                        <strong>@resource.Name</strong> - @resource.Description
+                    </a>
+                }
+            </div>
+        } else {
+            <div class="alert alert-warning" role="alert">
+                No resource found.
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@page
+@using Undefended.Extensions
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col-12">
+        <ul>
+            @if (Request.HasPermission("admin")) {
+                <li>
+                    <a asp-page="/Admins/Resources/Index">Admin Resources Panel</a>
+                </li>
+                <li>
+                    <a asp-page="/Admins/Permissions/Index">Permissions Panel</a>
+                </li>
+            }
+            <li>
+                <a asp-page="/Resources/Index">Resources Panel</a>
+            </li>
+        </ul>
+    </div>
+</div>

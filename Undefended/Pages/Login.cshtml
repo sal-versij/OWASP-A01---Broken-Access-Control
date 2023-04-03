@@ -1,0 +1,28 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Login</h1>
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" id="inputEmail" type="email" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" class="form-control" id="inputPassword" type="password" />
+            </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary w-75" type="submit">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

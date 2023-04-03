@@ -1,0 +1,22 @@
+﻿@page "/Admins/Resource/Editor/{id?}"
+@model Undefended.Pages.Admins.Resources.EditorModel
+
+@{
+    ViewData["Title"] = "Resource Editor";
+}
+<h1>Resource Editor</h1>
+<form class="row" method="post">
+    <div class="col-12">
+        <label class="form-label" for="InputName">Name</label>
+        <input class="form-control" id="InputName" name="Resource.Name" required type="text" value="@Model.Resource.Name" />
+    </div>
+    <div class="col-12">
+        <label class="form-label" for="InputDescription">Description</label>
+        <input class="form-control" id="InputDescription" name="Resource.Description" type="text" value="@Model.Resource.Description" />
+    </div>
+    <div class="col-12 mt-4">
+        <div class="d-flex justify-content-center">
+            <input class="btn btn-primary w-50" type="submit" value="Save" />
+        </div>
+    </div>
+</form>
