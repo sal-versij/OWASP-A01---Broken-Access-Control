@@ -92,4 +92,27 @@ public class PermissionService : IPermissionService {
 		if (resource.UserId != user.Id)
 			throw new ForbiddenException("User doesn't have access to this resource");
 	}
+
+	public async Task AddClaimToUserAsync(string userId, string type, string value) {
+		await AssertUserIsAdminAsync();
+		var user = await GetUserAsync(userId);
+		if (user is null)
+			throw new NotFoundException("User not found");
+
+		await _userManager.AddClaimAsync(user, new(type, value));
+	}
+
+	public async Task RemoveClaimFromUserAsync(string userId, string claimType) {
+		await AssertUserIsAdminAsync();
+		var user = await GetUserAsync(userId);
+		if (user is null)
+			throw new NotFoundException("User not found");
+
+		var claims = await _userManager.GetClaimsAsync(user);
+		var claim  = claims.FirstOrDefault(x => x.Type == claimType);
+		if (claim is null)
+			throw new NotFoundException("Claim not found");
+
+		await _userManager.RemoveClaimAsync(user, claim);
+	}
 }

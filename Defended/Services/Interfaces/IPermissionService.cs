@@ -12,4 +12,6 @@ public interface IPermissionService {
 	Task                            AssertUserCanAccessResourceAsync(string id);
 	Task                            AssertUserIsAdminAsync();
 	Task                            AssertUserCanAccessAdminResourceAsync(string id);
+	Task                            AddClaimToUserAsync(string                   userId, string type, string value);
+	Task                            RemoveClaimFromUserAsync(string              userId, string claimType);
 }
