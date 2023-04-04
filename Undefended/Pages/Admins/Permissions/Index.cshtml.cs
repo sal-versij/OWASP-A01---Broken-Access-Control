@@ -34,4 +34,19 @@ public class IndexModel : PageModel {
 
 		return Page();
 	}
+
+	public async Task<IActionResult> OnPostAsync(int? id, string permission) {
+		if (id is null) {
+			return RedirectToPage("/Error");
+		}
+
+		var user = await _usersService.GetUserAsync(id.Value);
+		if (user is null) {
+			return RedirectToPage("/Error");
+		}
+
+		await _usersService.AddClaimToUserAsync(user.Id, permission);
+
+		return RedirectToPage("/Admins/Permissions/Index", new { id });
+	}
 }

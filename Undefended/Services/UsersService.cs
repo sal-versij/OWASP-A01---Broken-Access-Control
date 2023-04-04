@@ -25,4 +25,34 @@ public class UsersService : IUsersService {
 	public async Task<ICollection<User>> GetAllUsersAsync() {
 		return await _dbContext.Users.Include(x => x.Permissions).ToListAsync();
 	}
+
+	public async Task AddClaimToUserAsync(int userId, string permission) {
+		var user = await GetUserAsync(userId);
+
+		if (user.Permissions?.Any(x => x.Permission == permission) == true) {
+			throw new("User already has this permission");
+		}
+
+		user.Permissions!.Add(
+			new() {
+				Permission = permission,
+				UserId     = userId,
+			});
+
+		await _dbContext.SaveChangesAsync();
+	}
+
+	public async Task RemoveClaimFromUserAsync(int userId, string permission) {
+		var user = await GetUserAsync(userId);
+
+		var userPermission = user.Permissions?.FirstOrDefault(x => x.Permission == permission);
+
+		if (userPermission == null) {
+			throw new("User does not have this permission");
+		}
+
+		user.Permissions!.Remove(userPermission);
+
+		await _dbContext.SaveChangesAsync();
+	}
 }
